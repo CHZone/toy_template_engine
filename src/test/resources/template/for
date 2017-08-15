@@ -1,0 +1,7 @@
+<p>Welcome, test for!</p>
+<p>Products:</p>
+<ul>
+{% for product in products %}
+    <li>{{ product.getName }}:{{ product.getPrice }}</li>
+{% endfor %}
+</ul>

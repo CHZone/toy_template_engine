@@ -1,0 +1,7 @@
+<p>Welcome, obj.toString()!</p>
+<p>Products:</p>
+<ul>
+
+    <li>{{ product}}</li>
+
+</ul>

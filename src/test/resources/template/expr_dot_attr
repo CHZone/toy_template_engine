@@ -1,0 +1,7 @@
+<p>Welcome, plaintext!</p>
+<p>Products:</p>
+<ul>
+
+    <li>{{ product.getName }}:{{ product.getPrice }}</li>
+
+</ul>

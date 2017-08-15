@@ -4,3 +4,7 @@
 /.classpath
 /.project
 /build/*.class
+/build/
+/bin/
+/.idea/
+/toy_template_engine.iml

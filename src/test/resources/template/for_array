@@ -1,0 +1,7 @@
+<p>Welcome, test for array!</p>
+<p>Products:</p>
+<ul>
+{% for product in products %}
+    <li>{{ product }}</li>
+{% endfor %}
+</ul>

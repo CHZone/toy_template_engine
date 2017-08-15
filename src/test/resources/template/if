@@ -1,0 +1,8 @@
+<p>Welcome, test if! if !products.isEmpty
+如果products为null则if的条件会返回true，此时用户容易在使用时出错</p>
+<p>Products:</p>
+<ul>
+{% if !products.isEmpty %}
+    <li>{{products}}</li>
+{% endif %}
+</ul>

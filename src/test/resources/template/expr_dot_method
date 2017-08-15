@@ -1,0 +1,8 @@
+<p>Welcome, plaintext!</p>
+<p>Products:</p>
+<ul>
+
+    <li>{{ product.toString }}:
+        </li>
+
+</ul>
