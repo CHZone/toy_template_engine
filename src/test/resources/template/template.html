@@ -1,0 +1,17 @@
+<html>
+<head>
+	<title>{{ title }}</title>
+</head>
+	<body>
+		<p>Supported Syntax:</p>
+		{% if !syntaxList.isEmpty %}
+		<ul>
+		{% for syntax in syntaxList %}
+			{% if !syntax.isEmpty %}
+		    <li>{{ syntax }}</li>
+		    {% endif %}
+		{% endfor %}
+		</ul>
+		{% endif %}
+	</body>
+</html>
