@@ -52,12 +52,16 @@ public class TemplateConstructor {
 	 */
 
 	public TemplateConstructor(String templateName) {
-		this.templateName = templateName;
+		this.templateName = templateName.replaceAll("[.]", "_");
+		logger.info("Template Class Name: "+this.templateName);
 		// 加载模板文件
 		String text = loadTemplateSource(templateName);
 		// 解析模板
 		parsTemplate(text);
 	}
+	
+	
+	
 	/**
 	 * 读取模板文件返回模板文本,太混乱了
 	 * 
@@ -65,7 +69,6 @@ public class TemplateConstructor {
 	 * @return
 	 */
 	public String loadTemplateSource(String templateName) {
-		this.templateName = templateName;
 		String path = ConstantValue.TEMPLATE_FILE_PATH;
 		String location = path + File.separatorChar + templateName;
 		logger.info("Looking for template in {}.", location);
@@ -111,7 +114,7 @@ public class TemplateConstructor {
 		addHeadCode();
 		while (m.find()) {
 			// 处理token前面的文本
-			handleText(text.substring(currIndex, m.start()+2));
+			handleText(text.substring(currIndex, m.start()));
 			// 处理token String
 			String tokenStr = text.substring(m.start(), m.end());
 			// 遍历token列表，在匹配的类型中处理token语句
@@ -167,7 +170,7 @@ public class TemplateConstructor {
 	 * builder.append("<p>Welcome, test for!</p>\n<p>Products:</p>\n<ul>\n");
 	 * @param str
 	 */
-	public void handleText(String str) {
+	public void handleText3(String str) {
 		logger.error(str);
 		// 1. if和for独占一行值后面的换行符需要去除
 		// 2. if和for嵌套时，前面的空格也要去除
@@ -192,6 +195,32 @@ public class TemplateConstructor {
 		}
 		str = str.replaceAll(ConstantValue.LINE_SEPERATOR, "\\\\n");
 		code.add_line(inLineText(str));
+	}
+	/**
+	 * str 可能包含多行，不能直接放到append中，因此拆分成多行，逐行添加
+	 * 没有对多行文本的builder.append操作进行紧凑处理。
+	 * @param str
+	 */
+	public void handleText(String str) {
+		String[] strList = str.split(ConstantValue.LINE_SEPERATOR);
+		if (strList.length<1){
+			return;
+		}
+		for (int i = 0; i < strList.length - 1; i++) {
+//			if("".equals(strList[i])){
+//				continue;
+//			}
+			code.add_line(exclusiveLineText(strList[i]));
+		}
+		
+		code.add_line(inLineText(strList[strList.length - 1]));
+	}
+	/**
+	 * 文本独占一行
+	 * 构建显示纯文本Java代码
+	 */
+	public String exclusiveLineText(String str) {
+		return String.format("builder.append(\"%s\\n\");", str);
 	}
 	/**
 	 * 行内文本，不换行

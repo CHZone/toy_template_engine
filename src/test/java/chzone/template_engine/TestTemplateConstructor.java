@@ -2,6 +2,7 @@ package chzone.template_engine;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
@@ -102,8 +103,8 @@ public class TestTemplateConstructor {
 		Map<String,Object> context = new HashMap<String,Object>();
 		ArrayList<Product> products = new ArrayList<>();
 		Product p = new Product("Apple", 5);
-//		products.add(p);
-//		products.add(p);
+		products.add(p);
+		products.add(p);
 		context.put("products", products);
 		System.out.println(at.render(context));
 		
@@ -125,14 +126,15 @@ public class TestTemplateConstructor {
 		
 	}
 	public static void main(String[] args) throws TemplateException {
-		TemplateConstructor tc = new TemplateConstructor("for_if");
+		TemplateConstructor tc = new TemplateConstructor("template.html");
 		AbstractTemplate at = tc.getTemplate();
 		Map<String,Object> context = new HashMap<String,Object>();
-		ArrayList<Product> products = new ArrayList<>();
-		Product p = new Product("Apple", 5);
-		products.add(p);
-		products.add(p);
-		context.put("products", products);
+		context.put("title", "stupid toy template engine");
+		List<String> syntaxList = new ArrayList<String>();
+		syntaxList.add("{{value}}");
+		syntaxList.add("{% if expression %} .... {% endif %}");
+		syntaxList.add("{% for item in  collection %} .... {% end for %}");
+		context.put("syntaxList", syntaxList);
 		System.out.println(at.render(context));
 	}
 }
