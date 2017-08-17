@@ -42,31 +42,19 @@ context.put("syntaxList", syntaxList);
 System.out.println(at.render(context));
 ```
 the output:
-```
+```html
 <html>
 <head>
-	<title>stupid toy template engine</title>
+    <title>stupid toy template engine</title>
 </head>
-	<body>
-		<p>Supported Syntax:</p>
-		
-		<ul>
-		
-			
-		    <li>{{value}}</li>
-		    
-		
-			
-		    <li>{% if expression %} .... {% endif %}</li>
-		    
-		
-			
-		    <li>{% for item in  collection %} .... {% end for %}</li>
-		    
-		
-		</ul>
-		
-	</body>
+<body>
+    <p>Supported Syntax:</p>
+    <ul>
+        <li>{{value}}</li>
+        <li>{% if expression %} .... {% endif %}</li>
+        <li>{% for item in  collection %} .... {% end for %}</li>
+    </ul>
+</body>
 </html>
 
 
