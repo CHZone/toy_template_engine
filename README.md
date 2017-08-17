@@ -4,12 +4,12 @@ This is a stuipid template engine!
 
 # Basic Usage 
 First set the template file directory in class chzone.template_engine.utils.ConstantValue, stupid design!
-```
+```java
 // The template file will be placed in the directory
 public static String TEMPLATE_FILE_PATH = "src/test/resources/template";
 ```
 Creating a template like this:
-```
+```html
 <html>
 <head>
 	<title>{{ title }}</title>
@@ -28,8 +28,8 @@ Creating a template like this:
 	</body>
 </html>
 ```
-Java code 
-```
+Java code:
+```java
 TemplateConstructor tc = new TemplateConstructor("template.html");
 AbstractTemplate at = tc.getTemplate();
 Map<String,Object> context = new HashMap<String,Object>();
