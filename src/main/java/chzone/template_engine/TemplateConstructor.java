@@ -158,50 +158,24 @@ public class TemplateConstructor {
 		code.add_line("}");
 	}
 	
-	/**
-	 * 还是换成单行处理
-	 * 纯文本处理
-	 * Java中不支持多行字符串,此处需要添加4个斜线在字符串中表示2个斜线字符，并添加到模板的builder中，成为最终模板输出文本中的一个斜线
-	 * 此处将换行进行转义后悔会让模板类的代码更加紧凑，紧凑处理与功能无关。
-	 *  builder.append("<p>Welcome, test for!</p>\n");
-     *  builder.append("<p>Products:</p>\n");
-     *  builder.append("<ul>");
-	 * 紧凑处理后的效果
-	 * builder.append("<p>Welcome, test for!</p>\n<p>Products:</p>\n<ul>\n");
+	/**str中的换行符会使得生产的Java源码处理换行，导致编译时报语法错误
+	 * 此处进行转义,至于为什么要4个'\',我还在坑里面没有爬出来。
+	 * 谁想通了一定要告诉我！
+	 * 转义后可以减少生成的 代码的行数。
 	 * @param str
 	 */
-	public void handleText3(String str) {
-		logger.error(str);
-		// 1. if和for独占一行值后面的换行符需要去除
-		// 2. if和for嵌套时，前面的空格也要去除
-		// 许多token会独占一行，去掉token后换行符还在，会导致渲染出来的文本有多余的空行需去除
-		// 针对2
-//		String reg = "^\\n\\s*?\\{$";
-//		Pattern pattern = Pattern.compile(reg);
-//		Matcher matcher = pattern.matcher(str);
-//		if(matcher.find()){
-//			return;
-//		}
-//		if(str.startsWith(ConstantValue.LINE_SEPERATOR)&&str.endsWith("{%")){
-//			return;
-//		}
-		// 去掉 {%或{{
-		if(str.length()>2){
-			str = str.substring(0, str.length()-2);
-		}
-		// 针对1
-		if(str.startsWith(ConstantValue.LINE_SEPERATOR)){
-			str = str.substring(ConstantValue.LINE_SEPERATOR.length());
-		}
+	public void handleText(String str) {
+	    logger.error("直接输出===="+str);
 		str = str.replaceAll(ConstantValue.LINE_SEPERATOR, "\\\\n");
+		logger.error("转义输出===="+str);
 		code.add_line(inLineText(str));
 	}
 	/**
 	 * str 可能包含多行，不能直接放到append中，因此拆分成多行，逐行添加
-	 * 没有对多行文本的builder.append操作进行紧凑处理。
+	 * 空行产生的原因复杂，一并放到渲染后的内容中处理
 	 * @param str
 	 */
-	public void handleText(String str) {
+	public void handleText2(String str) {
 		String[] strList = str.split(ConstantValue.LINE_SEPERATOR);
 		if (strList.length<1){
 			return;
@@ -242,7 +216,9 @@ public class TemplateConstructor {
 	 * @return
 	 */
 	public AbstractTemplate getTemplate() {
-		System.out.println(code.toString());
+		logger.info("=====模板文本分割===========================");
+		logger.info(ConstantValue.LINE_SEPERATOR+this.textSource);
+		logger.info("=====模板文本分割===========================");
 		return code.compileToJava(code.toString(), "Template_" + this.templateName);
 	}
 	public String getTextSource() {
