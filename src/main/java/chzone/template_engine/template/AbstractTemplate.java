@@ -31,7 +31,10 @@ public abstract class AbstractTemplate  implements Template{
 		this.context = context;
 		this.builder = new StringBuilder();
 		buildContent();
-		return builder.toString();
+		//统一去除空行
+		String renderedText = builder.toString();
+		return renderedText.replaceAll("\n\\s*\n", "\n");
+		
 	}
 
 
