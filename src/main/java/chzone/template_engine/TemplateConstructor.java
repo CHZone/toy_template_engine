@@ -22,6 +22,8 @@ import org.apache.commons.io.IOUtils;
 
 import chzone.template_engine.compile.CodeBuilder;
 import chzone.template_engine.error.TemplateException;
+import chzone.template_engine.io.Resource;
+import chzone.template_engine.io.ResourceLoader;
 import chzone.template_engine.template.AbstractTemplate;
 import chzone.template_engine.token.AbstractToken;
 import chzone.template_engine.token.CommentToken;
@@ -75,8 +77,10 @@ public class TemplateConstructor {
 		File file = new File(path, templateName);
 		InputStream is = null;
 		try {
-			is = new FileInputStream(file);
-		} catch (FileNotFoundException e1) {
+		    ResourceLoader resourceLoader = new ResourceLoader();
+		    Resource urlResource = resourceLoader.getResource(location);
+			is = urlResource.getInputStream();
+		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			logger.info("InputStream error");
 			e1.printStackTrace();
@@ -99,7 +103,6 @@ public class TemplateConstructor {
 		}
 		this.textSource = source;
 		logger.info(ConstantValue.LINE_SEPERATOR+source);
-		logger.info("=====模板文本分割===========================");
 		return source;
 	}
 
@@ -165,9 +168,7 @@ public class TemplateConstructor {
 	 * @param str
 	 */
 	public void handleText(String str) {
-	    logger.error("直接输出===="+str);
 		str = str.replaceAll(ConstantValue.LINE_SEPERATOR, "\\\\n");
-		logger.error("转义输出===="+str);
 		code.add_line(inLineText(str));
 	}
 	/**
@@ -217,7 +218,7 @@ public class TemplateConstructor {
 	 */
 	public AbstractTemplate getTemplate() {
 		logger.info("=====模板文本分割===========================");
-		logger.info(ConstantValue.LINE_SEPERATOR+this.textSource);
+		logger.info(ConstantValue.LINE_SEPERATOR+code.toString());
 		logger.info("=====模板文本分割===========================");
 		return code.compileToJava(code.toString(), "Template_" + this.templateName);
 	}

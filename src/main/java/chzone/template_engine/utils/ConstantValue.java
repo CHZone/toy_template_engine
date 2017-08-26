@@ -10,5 +10,6 @@ public class ConstantValue {
 	 */                                                       
 	public static String LINE_SEPERATOR = System.getProperty("line.separator");
 	public static String COMPILED_PACKAGE_NAME = "main.template.compiled";//template.compiled";
-	public static String TEMPLATE_FILE_PATH = "src/test/resources/template";
+//	public static String TEMPLATE_FILE_PATH = "src/test/resources/template";
+	public static String TEMPLATE_FILE_PATH = "template";
 }
