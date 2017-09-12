@@ -74,7 +74,6 @@ public class TemplateConstructor {
 		String path = ConstantValue.TEMPLATE_FILE_PATH;
 		String location = path + File.separatorChar + templateName;
 		logger.info("Looking for template in {}.", location);
-		File file = new File(path, templateName);
 		InputStream is = null;
 		try {
 		    ResourceLoader resourceLoader = new ResourceLoader();
