@@ -1,6 +1,5 @@
 # toy_template_engine
 This is a stuipid template engine!    
-**Warming:** Using these code may destroy your project!^_^
 
 # Basic Usage 
 First set the template file directory in class chzone.template_engine.utils.ConstantValue, stupid design!
