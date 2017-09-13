@@ -9,10 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import chzone.template_engine.error.TemplateException;
 
-
-
-
-
 public abstract class AbstractTemplate  implements Template{
 	protected final Logger logger = LoggerFactory.getLogger(AbstractTemplate.class);
 	public final static String COMPILED_PACKAGE_NAME = "template";
@@ -37,12 +33,6 @@ public abstract class AbstractTemplate  implements Template{
 		
 	}
 
-
-//	protected Object getAttribute(NodeExpressionGetAttributeOrMethod.Type type, Object object, String attribute)
-//			throws AttributeNotFoundException {
-//		return getAttribute(type, object, attribute, new Object[0]);
-//	}
-
 	public void setSourceCode(String source) {
 		this.sourceCode = source;
 	}
@@ -61,7 +51,6 @@ public abstract class AbstractTemplate  implements Template{
 		Method f = null;
 		try {
 			f = c.getDeclaredMethod(attr);
-//			f.setAccessible(true);
 			try {
 				return f.invoke(o);
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {

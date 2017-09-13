@@ -16,7 +16,6 @@ public abstract class AbstractToken implements Token {
 
 	/**
 	 * 将点操作解析为dotfunc调用
-	 * 
 	 * @return
 	 */
 	@Override

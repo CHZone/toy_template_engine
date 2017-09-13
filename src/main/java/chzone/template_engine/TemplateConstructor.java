@@ -149,14 +149,14 @@ public class TemplateConstructor {
 	
 	private void addTailCode(String text) {
 		// 剩余的文本
-		// code.add_line(formatText(text.substring(currIndex)));
 		handleText(text);
-		// 收尾
+		// 降低缩进级别
 		code.dedent();
-		// 方法收尾
+		// 方法结束
 		code.add_line("}");
-		// class 收尾
+		// 降低缩进级别
 		code.dedent();
+		// class 结束
 		code.add_line("}");
 	}
 	
@@ -181,9 +181,6 @@ public class TemplateConstructor {
 			return;
 		}
 		for (int i = 0; i < strList.length - 1; i++) {
-//			if("".equals(strList[i])){
-//				continue;
-//			}
 			code.add_line(exclusiveLineText(strList[i]));
 		}
 		

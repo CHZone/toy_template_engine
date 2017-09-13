@@ -9,7 +9,6 @@ import java.net.URLConnection;
  *  Use the URL Object to return an InputStream .
  */
 public class URLResource implements Resource{
-    // final ?
     private final URL url;
     public URLResource(URL url){
         this.url = url;

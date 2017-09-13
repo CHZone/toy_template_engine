@@ -56,7 +56,7 @@ public class ForToken extends AbstractToken {
 			CodeBuilder code = templateConstructor.getCode();
 			code.dedent();
 			code.add_line("}");
-			opStack.pop();// pop words[1]
+			opStack.pop();
 		}else{
 			logger.error("An \"if\" token is need for this \"endif\" token !");
 		}
