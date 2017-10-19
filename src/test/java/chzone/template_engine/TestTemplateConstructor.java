@@ -63,7 +63,7 @@ public class TestTemplateConstructor {
 		System.out.println(at.render(context));
 		
 	}
-	/**products.size()>0
+	/**
 	 * @throws TemplateException
 	 */
 	@Test
