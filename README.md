@@ -1,5 +1,5 @@
 # toy_template_engine
-This is a stuipid template engine!    
+This is a toy template engine! It can converts text that contains specific tags to HTML text.
 
 # Basic Usage 
 First set the template file directory in class chzone.template_engine.utils.ConstantValue, stupid design!
